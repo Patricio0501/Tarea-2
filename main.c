@@ -56,31 +56,6 @@ int Verificacion(char* palabra) {
     return 0;
 }
 
-void MostrarMapa(Mapa* mapaTuristas, Mapa* mapaPuntoInteres) {
-    printf("Contenido del Mapa de Turistas:\n");
-    for (int i = 0; i < mapaTuristas->size; i++) {
-        printf("País: %s\n", mapaTuristas->pairs[i].clave);
-        struct TuristasPorPais* turistasPorPais = (struct TuristasPorPais*)mapaTuristas->pairs[i].contenido;
-        for (int j = 0; j < turistasPorPais->size; j++) {
-            printf("Nombre del Turista: %s\n", turistasPorPais->turistas[j].nombre);
-            printf("Lugares Favoritos:\n");
-            printf("%s\n", turistasPorPais->turistas[j].lugaresFavoritos);
-        }
-        printf("--------------------------\n");
-    }
-
-    printf("Contenido del Mapa de Puntos de Interés:\n");
-    for (int i = 0; i < mapaPuntoInteres->size; i++) {
-        printf("Tipo: %s\n", mapaPuntoInteres->pairs[i].clave);
-        struct PuntosInteresPorTipo* puntosInteresPorTipo = (struct PuntosInteresPorTipo*)mapaPuntoInteres->pairs[i].contenido;
-        for (int j = 0; j < puntosInteresPorTipo->numNombres; j++) {
-            printf("Nombre del Punto de Interés: %s\n", puntosInteresPorTipo->nombres[j]);
-        }
-        printf("--------------------------\n");
-    }
-}
-
-
 Mapa* crearMapaVacio() {
     Mapa* mapa = (Mapa*)malloc(sizeof(Mapa));
     if (mapa) {
@@ -628,7 +603,6 @@ int main(void) {
                 printf("Por favor ingrese el nombre del archivo CSV de turistas: ");
                 scanf(" %[^\n]", nombreArchivoCSV);
                 ImportarTuristas(listaTuristas, MapaTuristaPais, &numTuristas, nombreArchivoCSV);
-                MostrarMapa(MapaTuristaPais, MapaPuntoInteres);
                 break;
             case 9:
                 printf("Ingrese el nombre del archivo CSV de puntos de interés para exportarlo: ");
